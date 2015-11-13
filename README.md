@@ -15,7 +15,7 @@
 
 Given a posts#index and a posts#show, they should link between each other
 
-we could use <a href="/posts/#{@post.id}"> but thats very low level.
+we could use `<a href="/posts/#{@post.id}">` but thats very low level.
 
 Let's start by having posts#index link to individual posts show pages.
 
