@@ -44,3 +44,5 @@ using post_path(:id => @post.id)
 using post_path(@post.id)
 
 using post_path(@post)
+
+<a href='https://learn.co/lessons/rails-url-helpers-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
