@@ -47,8 +47,6 @@ posts   GET  /posts(.:format)       posts#index
 post    GET  /posts/:id(.:format)   posts#show
 ```
 
-You can follow along with this [code repo](https://github.com/jordanhudgens/blog-flash).
-
 These four columns tell us everything that we'll need in order to use the route helper methods. The breakdown is below:
 
 * **Column 1** - This column gives the prefix for the route helper methods. In the current application `posts` and `post` are the prefixes for the methods that you can use throughout your applications. The two most popular method types are `_path` and `_url`. So if we want to render a relative link path to our posts' index page the method would be `posts_path` or `posts_url`. The difference between `_path` and `_url` is that `_path` gives the relative path and `_url` renders the full URL. If you open up the rails console in the [sample app](https://github.com/jordanhudgens/blog-flash) you can test these route helpers out. Run `posts_path` and see what the output is. You can also run `posts_url` and see how it prints out the full path instead of the relative path. **In general, it's best to use the `_path` version so if your server domain changes, nothing breaks**.
@@ -77,7 +75,7 @@ One of the other nice things about utilizing route helper methods is that they c
 All of our tests are currently passing, let's create a new Capybara spec. The scenario we will be building is to ensure that a link from the index page will point to that post's respective show page view template. The scenario is below:
 
 ```ruby
-describe 'index page'
+describe 'index page' do
   it 'links to post page' do
     second_post = Post.create(title: "My Title", description: "My post description")
     visit posts_path
