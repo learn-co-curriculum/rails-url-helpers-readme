@@ -78,7 +78,7 @@ All of our tests are currently passing, let's create a new Capybara spec. The sc
 
 ```ruby
 describe 'index page'
-	it 'links to post page' do
+  it 'links to post page' do
 	  second_post = Post.create(title: "My Title", description: "My post description")
 	  visit posts_path
 	  expect(page).to have_link(second_post.title, href: post_path(second_post))
