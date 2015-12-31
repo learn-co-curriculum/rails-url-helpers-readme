@@ -151,3 +151,5 @@ Now the application can let users navigate to `/register` to sign up and you, as
 ## Summary
 
 Now you will notice the beauty of using route helper methods. If you run our tests you will notice something interesting: all of the tests are still passing! If we had hardcoded the URLs in the links in our views we would have had a major issue: all of our links to the show pages would have broken, along with our Capybara tests. However, by using the built in helper methods the links all updated automatically.
+
+<a href='https://learn.co/lessons/rails-url-helpers-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
