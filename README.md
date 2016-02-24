@@ -22,7 +22,7 @@ Don't worry if it's still a little fuzzy, here's an example of what it looks lik
 
 So why would we want to use route helper methods as opposed to hard coding paths into the application? There are a number of reasons, below are a few of the key rationales:
 
-* Route helpers are more dynamic since they are methods and not simply strings, this means that if something changes with the route, there are many cases were the code itself doesn't even need to be changed
+* Route helpers are more dynamic since they are methods and not simply strings, this means that if something changes with the route, there are many cases where the code itself doesn't even need to be changed
 
 * Route helper methods help clean up the view and controller code and assist with readability. On a side note, you cannot use these helper methods in your model files.
 
@@ -40,7 +40,7 @@ To begin, we're going to start with an application that has the MVC setup for ``
 resources :posts, only: [:index, :show]
 ```
 
-We briefly discussed this `resources` method in the dynamic routing lesson, this will create routing methods for posts that we can utilized in our views and controllers. By running `rake routes` in the terminal it will give the following output:
+We briefly discussed this `resources` method in the dynamic routing lesson, this will create routing methods for posts that we can utilize in our views and controllers. By running `rake routes` in the terminal it will give the following output:
 
 ```
 posts   GET  /posts(.:format)       posts#index
@@ -122,7 +122,7 @@ We're using the ```link_to``` method to automatically create an HTML ```a``` tag
 
 ![Link To](https://s3.amazonaws.com/flatiron-bucket/readme-lessons/link_to.png)
 
-As you will see, even those we never added HTML code for the link, such as: ```<a href="..."></a>``` the ```link_to``` method rendered the correct tag for us.
+As you will see, even though we never added HTML code for the link, such as: ```<a href="..."></a>``` the ```link_to``` method rendered the correct tag for us.
 
 
 ## Using the :as option
@@ -153,3 +153,4 @@ Now the application can let users navigate to `/register` to sign up and you, as
 Now you will notice the beauty of using route helper methods. If you run our tests you will notice something interesting: all of the tests are still passing! If we had hardcoded the URLs in the links in our views we would have had a major issue: all of our links to the show pages would have broken, along with our Capybara tests. However, by using the built in helper methods the links all updated automatically.
 
 <a href='https://learn.co/lessons/rails-url-helpers-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/rails-url-helpers-readme'>Rails URL Helpers</a> on Learn.co and start learning to code for free.</p>
