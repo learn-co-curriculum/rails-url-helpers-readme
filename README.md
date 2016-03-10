@@ -33,7 +33,7 @@ So why would we want to use route helper methods as opposed to hard coding paths
 
 ## Implementing Route Helpers
 
-To begin, we're going to start with an application that has the MVC setup for ```posts```, with ```index``` and ```show``` actions currently in place. The route call looks like this:
+To begin, we're going to start with an application that has the MVC setup for `posts`, with `index` and `show` actions currently in place. The route call looks like this:
 
 ```ruby
 # config/routes.rb
@@ -42,7 +42,7 @@ resources :posts, only: [:index, :show]
 
 We briefly discussed this `resources` method in the dynamic routing lesson, this will create routing methods for posts that we can utilize in our views and controllers. By running `rake routes` in the terminal it will give the following output:
 
-```
+```bash
 posts   GET  /posts(.:format)       posts#index
 post    GET  /posts/:id(.:format)   posts#show
 ```
@@ -57,17 +57,17 @@ These four columns tell us everything that we'll need in order to use the route 
 
 * **Column 4** - This column shows the controller and action with the syntax of `controller#action`.
 
-One of the other nice things about utilizing route helper methods is that they create predictable names for the methods. Once you get into day to day Rails development you will only need to run ```rake routes``` to find custom paths. Let's imagine that you takeover a legacy Rails application that was built with traditional routing conventions. If you see CRUD controllers for: newsletters, students, sales, offers, and coupons; you don't have to lookup the routes to know that you could call the index URLs for each resource below:
+One of the other nice things about utilizing route helper methods is that they create predictable names for the methods. Once you get into day to day Rails development you will only need to run `rake routes` to find custom paths. Let's imagine that you takeover a legacy Rails application that was built with traditional routing conventions. If you see CRUD controllers for: newsletters, students, sales, offers, and coupons; you don't have to lookup the routes to know that you could call the index URLs for each resource below:
 
-* Newsletters - ```newsletters_path```
+* Newsletters - `newsletters_path`
 
-* Students - ```students_path```
+* Students - `students_path`
 
-* Sales - ```sales_path```
+* Sales - `sales_path`
 
-* Offers - ```offers_path```
+* Offers - `offers_path`
 
-* Coupons - ```coupons_path```
+* Coupons - `coupons_path`
 
 
 ## link_to Method
@@ -108,7 +108,7 @@ This works and gets the tests passing, however it can be refactored. Instead of 
 <% end %>
 ```
 
-This is much better, but to be thorough, let's make one last refactor: Rails is smart enough to know that if you pass in the ```post``` object as an argument, it will automatically use the ID attribute, so we'll use this implementation code:
+This is much better, but to be thorough, let's make one last refactor: Rails is smart enough to know that if you pass in the `post` object as an argument, it will automatically use the ID attribute, so we'll use this implementation code:
 
 ```ERB
 <% @posts.each do |post| %>
@@ -118,24 +118,24 @@ This is much better, but to be thorough, let's make one last refactor: Rails is 
 
 If you run the tests now you'll see that they're all still passing.
 
-We're using the ```link_to``` method to automatically create an HTML ```a``` tag. Now all of the tests are passing. If you open the browser and inspect the HTML element of the link you would see the following:
+We're using the `link_to` method to automatically create an HTML `a` tag. Now all of the tests are passing. If you open the browser and inspect the HTML element of the link you would see the following:
 
 ![Link To](https://s3.amazonaws.com/flatiron-bucket/readme-lessons/link_to.png)
 
-As you will see, even though we never added HTML code for the link, such as: ```<a href="..."></a>``` the ```link_to``` method rendered the correct tag for us.
+As you will see, even though we never added HTML code for the link, such as: `<a href="..."></a>` the `link_to` method rendered the correct tag for us.
 
 
 ## Using the :as option
 
 If for any reason you don't like the naming structure for the methods or paths you can customize them quite easily. A common change is updating the path users go to in order to register for a site, out of the box the standard path would be:
 
-```
+```bash
 /users/new
 ```
 
 However we want something a little more readable like:
 
-```
+```bash
 /register
 ```
 
