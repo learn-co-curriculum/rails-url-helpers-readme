@@ -18,7 +18,7 @@ Don't worry if it's still a little fuzzy, here's an example of what it looks lik
 
 * **Hard coded path:** `"/posts/#{@post.id}"`
 
-* **Route helper:** `post_path(post)`
+* **Route helper:** `post_path(@post)`
 
 So why would we want to use route helper methods as opposed to hard coding paths into the application? There are a number of reasons, below are a few of the key rationales:
 
@@ -33,7 +33,7 @@ So why would we want to use route helper methods as opposed to hard coding paths
 
 ## Implementing Route Helpers
 
-To begin, we're going to start with an application that has the MVC setup for ```posts```, with ```index``` and ```show``` actions currently in place. The route call looks like this:
+To begin, we're going to start with an application that has the MVC setup for `posts`, with `index` and `show` actions currently in place. The route call looks like this:
 
 ```ruby
 # config/routes.rb
@@ -42,14 +42,14 @@ resources :posts, only: [:index, :show]
 
 We briefly discussed this `resources` method in the dynamic routing lesson, this will create routing methods for posts that we can utilize in our views and controllers. By running `rake routes` in the terminal it will give the following output:
 
-```
+```bash
 posts   GET  /posts(.:format)       posts#index
 post    GET  /posts/:id(.:format)   posts#show
 ```
 
 These four columns tell us everything that we'll need in order to use the route helper methods. The breakdown is below:
 
-* **Column 1** - This column gives the prefix for the route helper methods. In the current application `posts` and `post` are the prefixes for the methods that you can use throughout your applications. The two most popular method types are `_path` and `_url`. So if we want to render a relative link path to our posts' index page the method would be `posts_path` or `posts_url`. The difference between `_path` and `_url` is that `_path` gives the relative path and `_url` renders the full URL. If you open up the rails console in the [sample app](https://github.com/jordanhudgens/blog-flash) you can test these route helpers out. Run `posts_path` and see what the output is. You can also run `posts_url` and see how it prints out the full path instead of the relative path. **In general, it's best to use the `_path` version so if your server domain changes, nothing breaks**.
+* **Column 1** - This column gives the prefix for the route helper methods. In the current application `posts` and `post` are the prefixes for the methods that you can use throughout your applications. The two most popular method types are `_path` and `_url`. So if we want to render a relative link path to our posts' index page the method would be `posts_path` or `posts_url`. The difference between `_path` and `_url` is that `_path` gives the relative path and `_url` renders the full URL. If you open up the rails console in the [sample app](https://github.com/jordanhudgens/blog-flash) you can test these route helpers out. Run `app.posts_path` and see what the output is. You can also run `app.posts_url` and see how it prints out the full path instead of the relative path. **In general, it's best to use the `_path` version so if your server domain changes, nothing breaks**.
 
 * **Column 2** - This is the HTTP verb
 
@@ -57,17 +57,17 @@ These four columns tell us everything that we'll need in order to use the route 
 
 * **Column 4** - This column shows the controller and action with the syntax of `controller#action`.
 
-One of the other nice things about utilizing route helper methods is that they create predictable names for the methods. Once you get into day to day Rails development you will only need to run ```rake routes``` to find custom paths. Let's imagine that you takeover a legacy Rails application that was built with traditional routing conventions. If you see CRUD controllers for: newsletters, students, sales, offers, and coupons; you don't have to lookup the routes to know that you could call the index URLs for each resource below:
+One of the other nice things about utilizing route helper methods is that they create predictable names for the methods. Once you get into day to day Rails development you will only need to run `rake routes` to find custom paths. Let's imagine that you takeover a legacy Rails application that was built with traditional routing conventions. If you see CRUD controllers for: newsletters, students, sales, offers, and coupons; you don't have to lookup the routes to know that you could call the index URLs for each resource below:
 
-* Newsletters - ```newsletters_path```
+* Newsletters - `newsletters_path`
 
-* Students - ```students_path```
+* Students - `students_path`
 
-* Sales - ```sales_path```
+* Sales - `sales_path`
 
-* Offers - ```offers_path```
+* Offers - `offers_path`
 
-* Coupons - ```coupons_path```
+* Coupons - `coupons_path`
 
 
 ## link_to Method
@@ -86,7 +86,7 @@ end
 
 This matcher will fail since our index page doesn't currently link to the show page. To fix this let's update the index page like so:
 
-```ERB
+```erb
 <% @posts.each do |post| %>
   <div><a href='<%= "/posts/#{post.id}" %>'><%= post.title %></a></div>
 <% end %>
@@ -94,7 +94,7 @@ This matcher will fail since our index page doesn't currently link to the show p
 
 Wow, is this 2004? That is some ugly code, let's use a `link_to` method to clean this up and get rid of multiple `ERB` calls on the same line.
 
-```ERB
+```erb
 <% @posts.each do |post| %>
   <div><%= link_to post.title, "/posts/#{post.id}" %></div>
 <% end %>
@@ -102,15 +102,15 @@ Wow, is this 2004? That is some ugly code, let's use a `link_to` method to clean
 
 This works and gets the tests passing, however it can be refactored. Instead of hardcoding the path and using string interpolation, let's using `post_path` and pass in the post argument.
 
-```ERB
+```erb
 <% @posts.each do |post| %>
   <div><%= link_to post.title, post_path(post.id) %></div>
 <% end %>
 ```
 
-This is much better, but to be thorough, let's make one last refactor: Rails is smart enough to know that if you pass in the ```post``` object as an argument, it will automatically use the ID attribute, so we'll use this implementation code:
+This is much better, but to be thorough, let's make one last refactor: Rails is smart enough to know that if you pass in the `post` object as an argument, it will automatically use the ID attribute, so we'll use this implementation code:
 
-```ERB
+```erb
 <% @posts.each do |post| %>
   <div><%= link_to post.title, post_path(post) %></div>
 <% end %>
@@ -118,24 +118,24 @@ This is much better, but to be thorough, let's make one last refactor: Rails is 
 
 If you run the tests now you'll see that they're all still passing.
 
-We're using the ```link_to``` method to automatically create an HTML ```a``` tag. Now all of the tests are passing. If you open the browser and inspect the HTML element of the link you would see the following:
+We're using the `link_to` method to automatically create an HTML `a` tag. Now all of the tests are passing. If you open the browser and inspect the HTML element of the link you would see the following:
 
 ![Link To](https://s3.amazonaws.com/flatiron-bucket/readme-lessons/link_to.png)
 
-As you will see, even though we never added HTML code for the link, such as: ```<a href="..."></a>``` the ```link_to``` method rendered the correct tag for us.
+As you will see, even though we never added HTML code for the link, such as: `<a href="..."></a>` the `link_to` method rendered the correct tag for us.
 
 
 ## Using the :as option
 
 If for any reason you don't like the naming structure for the methods or paths you can customize them quite easily. A common change is updating the path users go to in order to register for a site, out of the box the standard path would be:
 
-```
+```bash
 /users/new
 ```
 
 However we want something a little more readable like:
 
-```
+```bash
 /register
 ```
 
