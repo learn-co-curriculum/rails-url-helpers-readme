@@ -86,7 +86,7 @@ end
 
 This matcher will fail since our index page doesn't currently link to the show page. To fix this let's update the index page like so:
 
-```ERB
+```erb
 <% @posts.each do |post| %>
   <div><a href='<%= "/posts/#{post.id}" %>'><%= post.title %></a></div>
 <% end %>
@@ -94,7 +94,7 @@ This matcher will fail since our index page doesn't currently link to the show p
 
 Wow, is this 2004? That is some ugly code, let's use a `link_to` method to clean this up and get rid of multiple `ERB` calls on the same line.
 
-```ERB
+```erb
 <% @posts.each do |post| %>
   <div><%= link_to post.title, "/posts/#{post.id}" %></div>
 <% end %>
@@ -102,7 +102,7 @@ Wow, is this 2004? That is some ugly code, let's use a `link_to` method to clean
 
 This works and gets the tests passing, however it can be refactored. Instead of hardcoding the path and using string interpolation, let's using `post_path` and pass in the post argument.
 
-```ERB
+```erb
 <% @posts.each do |post| %>
   <div><%= link_to post.title, post_path(post.id) %></div>
 <% end %>
@@ -110,7 +110,7 @@ This works and gets the tests passing, however it can be refactored. Instead of 
 
 This is much better, but to be thorough, let's make one last refactor: Rails is smart enough to know that if you pass in the `post` object as an argument, it will automatically use the ID attribute, so we'll use this implementation code:
 
-```ERB
+```erb
 <% @posts.each do |post| %>
   <div><%= link_to post.title, post_path(post) %></div>
 <% end %>

@@ -6,5 +6,7 @@ tags:
   - custom routes
 languages:
   - ruby
+resources:
+  - 0
 type: 
   - readme
