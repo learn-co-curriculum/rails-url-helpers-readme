@@ -1,6 +1,10 @@
 # Rails URL Helpers
 
-Since Rails by design was meant to be flexible, the result is that there are typically a number of ways to accomplish the same features. Routes are a great example for how this principle operates in a Rails app. In this section we will review how to leverage built in URL helper methods instead of hard coding route paths into an application (along with why this is a good idea).
+Since Rails by design was meant to be flexible, the result is that there are
+typically a number of ways to accomplish the same features. Routes are a great
+example for how this principle operates in a Rails app. In this section we will
+review how to leverage built in URL helper methods instead of hard coding route
+paths into an application (along with why this is a good idea).
 
 
 ## Paths vs Route Helpers
@@ -49,15 +53,44 @@ post    GET  /posts/:id(.:format)   posts#show
 
 These four columns tell us everything that we'll need in order to use the route helper methods. The breakdown is below:
 
-* **Column 1** - This column gives the prefix for the route helper methods. In the current application `posts` and `post` are the prefixes for the methods that you can use throughout your applications. The two most popular method types are `_path` and `_url`. So if we want to render a relative link path to our posts' index page the method would be `posts_path` or `posts_url`. The difference between `_path` and `_url` is that `_path` gives the relative path and `_url` renders the full URL. If you open up the rails console in the [sample app](https://github.com/jordanhudgens/blog-flash) you can test these route helpers out. Run `app.posts_path` and see what the output is. You can also run `app.posts_url` and see how it prints out the full path instead of the relative path. **In general, it's best to use the `_path` version so if your server domain changes, nothing breaks**.
+* **Column 1** - This column gives the prefix for the route helper methods. In
+the current application `posts` and `post` are the prefixes for the methods that
+you can use throughout your applications. The two most popular method types are
+`_path` and `_url`. So if we want to render a relative link path to our posts'
+index page the method would be `posts_path` or `posts_url`. The difference
+between `_path` and `_url` is that `_path` gives the relative path and `_url`
+renders the full URL. If you open up the rails console in the [sample app](https://github.com/jordanhudgens/blog-flash)
+you can test these route helpers out. Run `app.posts_path` and see what the
+output is. You can also run `app.posts_url` and see how it prints out the full
+path instead of the relative path. **In general, it's best to use the `_path`
+version so if your server domain changes, nothing breaks**.
 
 * **Column 2** - This is the HTTP verb
 
-* **Column 3** - This column shows what the path for the route will be and what parameters need to be passed to the route. As you may notice the second row for the show route calls for an ID. When you pass the `resources` method the `:show` argument it will automatically create this route and assumes that you will need to pass the `id` into the URL string. Whenever you have `id` parameters listed in the path like this you will need to pass the route helper method an id, so an example of what our show route code would look like this: `post_path(@post)`. Notice how this is different than the `index` route of `posts_path`. Also you can ignore the `(.:format)` text for now. If you open up the rails console again you can call the route helpers. If you have a `Post` with an `id` of `3` you can run `app.post_path(3)` and see what the resulting output is. Running route helpers in the rails console is a great way of testing out routes to see what their exact output will be.
+* **Column 3** - This column shows what the path for the route will be and what
+parameters need to be passed to the route. As you may notice the second row for
+the show route calls for an ID. When you pass the `resources` method the `:show`
+argument it will automatically create this route and assumes that you will need
+to pass the `id` into the URL string. Whenever you have `id` parameters listed
+in the path like this you will need to pass the route helper method an id, so an
+example of what our show route code would look like this: `post_path(@post)`.
+Notice how this is different than the `index` route of `posts_path`. Also you
+can ignore the `(.:format)` text for now. If you open up the rails console again
+you can call the route helpers. If you have a `Post` with an `id` of `3` you can
+run `app.post_path(3)` and see what the resulting output is. Running route
+helpers in the rails console is a great way of testing out routes to see what
+their exact output will be.
 
-* **Column 4** - This column shows the controller and action with the syntax of `controller#action`.
+* **Column 4** - This column shows the controller and action with the syntax of
+`controller#action`.
 
-One of the other nice things about utilizing route helper methods is that they create predictable names for the methods. Once you get into day to day Rails development you will only need to run `rake routes` to find custom paths. Let's imagine that you takeover a legacy Rails application that was built with traditional routing conventions. If you see CRUD controllers for: newsletters, students, sales, offers, and coupons; you don't have to lookup the routes to know that you could call the index URLs for each resource below:
+One of the other nice things about utilizing route helper methods is that they
+create predictable names for the methods. Once you get into day to day Rails
+development you will only need to run `rake routes` to find custom paths.
+Let's imagine that you takeover a legacy Rails application that was built with
+traditional routing conventions. If you see CRUD controllers for: newsletters,
+students, sales, offers, and coupons; you don't have to lookup the routes to
+know that you could call the index URLs for each resource below:
 
 * Newsletters - `newsletters_path`
 
