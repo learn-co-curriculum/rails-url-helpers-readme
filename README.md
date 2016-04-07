@@ -105,7 +105,9 @@ know that you could call the index URLs for each resource below:
 
 ## link_to Method
 
-All of our tests are currently passing, let's create a new Capybara spec. The scenario we will be building is to ensure that a link from the index page will point to that post's respective show page view template. The scenario is below:
+All of our tests are currently passing, let's create a new Capybara spec. The
+scenario we will be building is to ensure that a link from the index page will
+point to that post's respective show page view template. The scenario is below:
 
 ```ruby
 describe 'index page' do
@@ -117,7 +119,8 @@ describe 'index page' do
 end
 ```
 
-This matcher will fail since our index page doesn't currently link to the show page. To fix this let's update the index page like so:
+This matcher will fail since our index page doesn't currently link to the show
+page. To fix this let's update the index page like so:
 
 ```erb
 <% @posts.each do |post| %>
@@ -125,7 +128,8 @@ This matcher will fail since our index page doesn't currently link to the show p
 <% end %>
 ```
 
-Wow, is this 2004? That is some ugly code, let's use a `link_to` method to clean this up and get rid of multiple `ERB` calls on the same line.
+Wow, is this 2004? That is some ugly code, let's use a `link_to` method to clean
+this up and get rid of multiple `ERB` calls on the same line.
 
 ```erb
 <% @posts.each do |post| %>
@@ -133,7 +137,9 @@ Wow, is this 2004? That is some ugly code, let's use a `link_to` method to clean
 <% end %>
 ```
 
-This works and gets the tests passing, however it can be refactored. Instead of hardcoding the path and using string interpolation, let's using `post_path` and pass in the post argument.
+This works and gets the tests passing, however it can be refactored. Instead of
+hardcoding the path and using string interpolation, let's using `post_path` and
+pass in the post argument.
 
 ```erb
 <% @posts.each do |post| %>
@@ -141,7 +147,9 @@ This works and gets the tests passing, however it can be refactored. Instead of 
 <% end %>
 ```
 
-This is much better, but to be thorough, let's make one last refactor: Rails is smart enough to know that if you pass in the `post` object as an argument, it will automatically use the ID attribute, so we'll use this implementation code:
+This is much better, but to be thorough, let's make one last refactor: Rails is
+smart enough to know that if you pass in the `post` object as an argument, it
+will automatically use the ID attribute, so we'll use this implementation code:
 
 ```erb
 <% @posts.each do |post| %>
@@ -151,16 +159,21 @@ This is much better, but to be thorough, let's make one last refactor: Rails is 
 
 If you run the tests now you'll see that they're all still passing.
 
-We're using the `link_to` method to automatically create an HTML `a` tag. Now all of the tests are passing. If you open the browser and inspect the HTML element of the link you would see the following:
+We're using the `link_to` method to automatically create an HTML `a` tag. Now
+all of the tests are passing. If you open the browser and inspect the HTML
+element of the link you would see the following:
 
 ![Link To](https://s3.amazonaws.com/flatiron-bucket/readme-lessons/link_to.png)
 
-As you will see, even though we never added HTML code for the link, such as: `<a href="..."></a>` the `link_to` method rendered the correct tag for us.
+As you will see, even though we never added HTML code for the link, such as:
+`<a href="..."></a>` the `link_to` method rendered the correct tag for us.
 
 
 ## Using the :as option
 
-If for any reason you don't like the naming structure for the methods or paths you can customize them quite easily. A common change is updating the path users go to in order to register for a site, out of the box the standard path would be:
+If for any reason you don't like the naming structure for the methods or paths
+you can customize them quite easily. A common change is updating the path users
+go to in order to register for a site, out of the box the standard path would be:
 
 ```bash
 /users/new
@@ -172,13 +185,16 @@ However we want something a little more readable like:
 /register
 ```
 
-In order to do this, let's update the route's file like so:
+In order to do this, let's update the `routes.rb` file and add the following
+line:
 
 ```ruby
 get '/register', to: 'users#new', as: 'register'
 ```
 
-Now the application can let users navigate to `/register` to sign up and you, as the developer, can utilize your own custom `register_path` route helper throughout the application.
+Now the application can let users navigate to `/register` to sign up and you,
+as the developer, can utilize your own custom `register_path` route helper
+throughout the application.
 
 
 ## Summary
