@@ -138,7 +138,7 @@ this up and get rid of multiple `ERB` calls on the same line.
 ```
 
 This works and gets the tests passing, however it can be refactored. Instead of
-hardcoding the path and using string interpolation, let's using `post_path` and
+hardcoding the path and using string interpolation, let's use `post_path` and
 pass in the post argument.
 
 ```erb
