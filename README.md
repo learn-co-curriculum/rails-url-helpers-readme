@@ -1,10 +1,6 @@
 # Rails URL Helpers
 
-Since Rails by design was meant to be flexible, the result is that there are
-typically a number of ways to accomplish the same features. Routes are a great
-example for how this principle operates in a Rails app. In this section we will
-review how to leverage built in URL helper methods instead of hard coding route
-paths into an application (along with why this is a good idea).
+Since Rails by design was meant to be flexible, the result is that there are typically a number of ways to accomplish the same features. Routes are a great example for how this principle operates in a Rails app. In this section we will review how to leverage built in URL helper methods instead of hard coding route paths into an application (along with why this is a good idea).
 
 
 ## Paths vs Route Helpers
@@ -53,44 +49,15 @@ post    GET  /posts/:id(.:format)   posts#show
 
 These four columns tell us everything that we'll need in order to use the route helper methods. The breakdown is below:
 
-* **Column 1** - This column gives the prefix for the route helper methods. In
-the current application `posts` and `post` are the prefixes for the methods that
-you can use throughout your applications. The two most popular method types are
-`_path` and `_url`. So if we want to render a relative link path to our posts'
-index page the method would be `posts_path` or `posts_url`. The difference
-between `_path` and `_url` is that `_path` gives the relative path and `_url`
-renders the full URL. If you open up the rails console in the [sample app](https://github.com/jordanhudgens/blog-flash)
-you can test these route helpers out. Run `app.posts_path` and see what the
-output is. You can also run `app.posts_url` and see how it prints out the full
-path instead of the relative path. **In general, it's best to use the `_path`
-version so if your server domain changes, nothing breaks**.
+* **Column 1** - This column gives the prefix for the route helper methods. In the current application `posts` and `post` are the prefixes for the methods that you can use throughout your applications. The two most popular method types are `_path` and `_url`. So if we want to render a relative link path to our posts' index page the method would be `posts_path` or `posts_url`. The difference between `_path` and `_url` is that `_path` gives the relative path and `_url` renders the full URL. If you open up the rails console in the [sample app](https://github.com/jordanhudgens/blog-flash) you can test these route helpers out. Run `app.posts_path` and see what the output is. You can also run `app.posts_url` and see how it prints out the full path instead of the relative path. **In general, it's best to use the `_path` version so if your server domain changes, nothing breaks**.
 
 * **Column 2** - This is the HTTP verb
 
-* **Column 3** - This column shows what the path for the route will be and what
-parameters need to be passed to the route. As you may notice the second row for
-the show route calls for an ID. When you pass the `resources` method the `:show`
-argument it will automatically create this route and assumes that you will need
-to pass the `id` into the URL string. Whenever you have `id` parameters listed
-in the path like this you will need to pass the route helper method an id, so an
-example of what our show route code would look like this: `post_path(@post)`.
-Notice how this is different than the `index` route of `posts_path`. Also you
-can ignore the `(.:format)` text for now. If you open up the rails console again
-you can call the route helpers. If you have a `Post` with an `id` of `3` you can
-run `app.post_path(3)` and see what the resulting output is. Running route
-helpers in the rails console is a great way of testing out routes to see what
-their exact output will be.
+* **Column 3** - This column shows what the path for the route will be and what parameters need to be passed to the route. As you may notice the second row for the show route calls for an ID. When you pass the `resources` method the `:show` argument it will automatically create this route and assumes that you will need to pass the `id` into the URL string. Whenever you have `id` parameters listed in the path like this you will need to pass the route helper method an id, so an example of what our show route code would look like this: `post_path(@post)`. Notice how this is different than the `index` route of `posts_path`. Also you can ignore the `(.:format)` text for now. If you open up the rails console again you can call the route helpers. If you have a `Post` with an `id` of `3` you can run `app.post_path(3)` and see what the resulting output is. Running route helpers in the rails console is a great way of testing out routes to see what their exact output will be.
 
-* **Column 4** - This column shows the controller and action with the syntax of
-`controller#action`.
+* **Column 4** - This column shows the controller and action with the syntax of `controller#action`.
 
-One of the other nice things about utilizing route helper methods is that they
-create predictable names for the methods. Once you get into day to day Rails
-development you will only need to run `rake routes` to find custom paths.
-Let's imagine that you takeover a legacy Rails application that was built with
-traditional routing conventions. If you see CRUD controllers for: newsletters,
-students, sales, offers, and coupons; you don't have to lookup the routes to
-know that you could call the index URLs for each resource below:
+One of the other nice things about utilizing route helper methods is that they create predictable names for the methods. Once you get into day to day Rails development you will only need to run `rake routes` to find custom paths. Let's imagine that you takeover a legacy Rails application that was built with traditional routing conventions. If you see CRUD controllers for: newsletters, students, sales, offers, and coupons; you don't have to lookup the routes to know that you could call the index URLs for each resource below:
 
 * Newsletters - `newsletters_path`
 
@@ -105,9 +72,7 @@ know that you could call the index URLs for each resource below:
 
 ## link_to Method
 
-All of our tests are currently passing, let's create a new Capybara spec. The
-scenario we will be building is to ensure that a link from the index page will
-point to that post's respective show page view template. The scenario is below:
+All of our tests are currently passing, let's create a new Capybara spec. The scenario we will be building is to ensure that a link from the index page will point to that post's respective show page view template. The scenario is below:
 
 ```ruby
 describe 'index page' do
@@ -119,8 +84,7 @@ describe 'index page' do
 end
 ```
 
-This matcher will fail since our index page doesn't currently link to the show
-page. To fix this let's update the index page like so:
+This matcher will fail since our index page doesn't currently link to the show page. To fix this let's update the index page like so:
 
 ```erb
 <% @posts.each do |post| %>
@@ -128,8 +92,7 @@ page. To fix this let's update the index page like so:
 <% end %>
 ```
 
-Wow, is this 2004? That is some ugly code, let's use a `link_to` method to clean
-this up and get rid of multiple `ERB` calls on the same line.
+Wow, is this 2004? That is some ugly code, let's use a `link_to` method to clean this up and get rid of multiple `ERB` calls on the same line.
 
 ```erb
 <% @posts.each do |post| %>
@@ -137,9 +100,7 @@ this up and get rid of multiple `ERB` calls on the same line.
 <% end %>
 ```
 
-This works and gets the tests passing, however it can be refactored. Instead of
-hardcoding the path and using string interpolation, let's use `post_path` and
-pass in the post argument.
+This works and gets the tests passing, however it can be refactored. Instead of hardcoding the path and using string interpolation, let's use `post_path` and pass in the post argument.
 
 ```erb
 <% @posts.each do |post| %>
@@ -147,9 +108,7 @@ pass in the post argument.
 <% end %>
 ```
 
-This is much better, but to be thorough, let's make one last refactor: Rails is
-smart enough to know that if you pass in the `post` object as an argument, it
-will automatically use the ID attribute, so we'll use this implementation code:
+This is much better, but to be thorough, let's make one last refactor: Rails is smart enough to know that if you pass in the `post` object as an argument, it will automatically use the ID attribute, so we'll use this implementation code:
 
 ```erb
 <% @posts.each do |post| %>
@@ -159,21 +118,16 @@ will automatically use the ID attribute, so we'll use this implementation code:
 
 If you run the tests now you'll see that they're all still passing.
 
-We're using the `link_to` method to automatically create an HTML `a` tag. Now
-all of the tests are passing. If you open the browser and inspect the HTML
-element of the link you would see the following:
+We're using the `link_to` method to automatically create an HTML `a` tag. Now all of the tests are passing. If you open the browser and inspect the HTML element of the link you would see the following:
 
 ![Link To](https://s3.amazonaws.com/flatiron-bucket/readme-lessons/link_to.png)
 
-As you will see, even though we never added HTML code for the link, such as:
-`<a href="..."></a>` the `link_to` method rendered the correct tag for us.
+As you will see, even though we never added HTML code for the link, such as: `<a href="..."></a>` the `link_to` method rendered the correct tag for us.
 
 
 ## Using the :as option
 
-If for any reason you don't like the naming structure for the methods or paths
-you can customize them quite easily. A common change is updating the path users
-go to in order to register for a site, out of the box the standard path would be:
+If for any reason you don't like the naming structure for the methods or paths you can customize them quite easily. A common change is updating the path users go to in order to register for a site, out of the box the standard path would be:
 
 ```bash
 /users/new
@@ -192,9 +146,7 @@ line:
 get '/register', to: 'users#new', as: 'register'
 ```
 
-Now the application can let users navigate to `/register` to sign up and you,
-as the developer, can utilize your own custom `register_path` route helper
-throughout the application.
+Now the application can let users navigate to `/register` to sign up and you, as the developer, can utilize your own custom `register_path` route helper throughout the application.
 
 
 ## Summary
