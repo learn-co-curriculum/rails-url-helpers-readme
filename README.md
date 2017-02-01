@@ -122,7 +122,8 @@ We're using the `link_to` method to automatically create an HTML `a` tag. If you
 
 ![Link To](https://s3.amazonaws.com/flatiron-bucket/readme-lessons/link_to.png)
 
-As you can see, even though we never added HTML code for the link –– e.g., `<a href="..."></a>` –– the `link_to` method rendered the correct tag for us.
+(If your browser loads a blank page, add Post.create(title: 'A lovely title', description: 'A superb description')
+ to db/seeds.rb, run rake db:migrate, and then restart your server.) As you can see, even though we never added HTML code for the link –– e.g., `<a href="..."></a>` –– the `link_to` method rendered the correct tag for us.
 
 
 ## Using the :as option
@@ -143,3 +144,5 @@ Now the application lets users navigate to `/register` to sign up, and you, the 
 Hopefully this lesson shed some light on the beauty of using route helper methods. If you run the tests again after making the above changes, you'll notice something interesting: all of the tests are still passing! If we had hardcoded the URLs in the links in our views, we would have had a major issue: all of our links to the show pages would have broken, along with our Capybara tests. However, by using the built-in helper methods, the links all updated automatically.
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/rails-url-helpers-readme'>Rails URL Helpers</a> on Learn.co and start learning to code for free.</p>
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/rails-url-helpers-readme'>Rails URL Helpers</a> on Learn.co and start learning to code for free.</p>
