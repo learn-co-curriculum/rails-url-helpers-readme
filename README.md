@@ -22,11 +22,11 @@ Don't worry if it's still a little fuzzy. Here's an example of what it looks lik
 
 So why would we want to use route helper methods as opposed to hard coding paths into the application? There are a number of reasons. Below are a few of the key rationales:
 
-* Route helpers are more dynamic since they are methods and not simply strings. This means that if something changes with the route there are many cases where the code itself won't need to be changed at all.
+* Route helpers are more dynamic since they are methods and not simply strings. This means that if something changes with the route there are many cases where the code itself won't need to be changed at all
 
-* Route helper methods help clean up the view and controller code and assist with readability. *On a side note, you cannot use these helper methods in your model files*.
+* Route helper methods help clean up the view and controller code and assist with readability. *On a side note, you cannot use these helper methods in your model files*
 
-* It's more natural to be able to pass arguments into a method as opposed to using string interpolation. For example, `post_path(post, opt_in: true)` is more readable than `"posts/<%= post.id %>?opt_in=true"`.
+* It's more natural to be able to pass arguments into a method as opposed to using string interpolation. For example, `post_path(post, opt_in: true)` is more readable than `"posts/<%= post.id %>?opt_in=true"`
 
 * Route helpers translate directly into HTML-friendly paths. In other words, if you have any weird characters in your urls, the route helpers will convert them so they can be read properly by browsers. This includes items such as spaces or characters such as `&`, `%`, etc.
 
@@ -49,13 +49,13 @@ post    GET  /posts/:id(.:format)   posts#show
 
 These four columns tell us everything that we'll need in order to use the route helper methods. The breakdown is below:
 
-* **Column 1** - This column gives the prefix for the route helper methods. In the current application, `posts` and `post` are the prefixes for the methods that you can use throughout your applications. The two most popular method types are `_path` and `_url`. So if we want to render a relative link path to our posts' index page, the method would be `posts_path` or `posts_url`. The difference between `_path` and `_url` is that `_path` gives the relative path and `_url` renders the full URL. If you open up the rails console in the [sample app](https://github.com/jordanhudgens/blog-flash) you can test these route helpers out. Run `app.posts_path` and see what the output is. You can also run `app.posts_url` and see how it prints out the full path instead of the relative path. **In general, it's best to use the `_path` version so that nothing breaks if your server domain changes**.
+* **Column 1** - This column gives the prefix for the route helper methods. In the current application, `posts` and `post` are the prefixes for the methods that you can use throughout your applications. The two most popular method types are `_path` and `_url`. So if we want to render a relative link path to our posts' index page, the method would be `posts_path` or `posts_url`. The difference between `_path` and `_url` is that `_path` gives the relative path and `_url` renders the full URL. If you open up the rails console, by running `rails console`, you can test these route helpers out. Run `app.posts_path` and see what the output is. You can also run `app.posts_url` and see how it prints out the full path instead of the relative path. **In general, it's best to use the `_path` version so that nothing breaks if your server domain changes**
 
-* **Column 2** - This is the HTTP verb.
+* **Column 2** - This is the HTTP verb
 
-* **Column 3** - This column shows what the path for the route will be and what parameters need to be passed to the route. As you may notice, the second row for the show route calls for an ID. When you pass the `resources` method to the `:show` argument, it will automatically create this route and assume that you will need to pass the `id` into the URL string. Whenever you have `id` parameters listed in the path like this, you will need to pass the route helper method an ID, so an example of what our show route code would look like is `post_path(@post)`. Notice how this is different than the `index` route of `posts_path`. Also, you can ignore the `(.:format)` text for now. If you open up the Rails console again, you can call the route helpers. If you have a `Post` with an `id` of `3`, you can run `app.post_path(3)` and see what the resulting output is. Running route helpers in the rails console is a great way of testing out routes to see what their exact output will be.
+* **Column 3** - This column shows what the path for the route will be and what parameters need to be passed to the route. As you may notice, the second row for the show route calls for an ID. When you pass the `resources` method to the `:show` argument, it will automatically create this route and assume that you will need to pass the `id` into the URL string. Whenever you have `id` parameters listed in the path like this, you will need to pass the route helper method an ID, so an example of what our show route code would look like is `post_path(@post)`. Notice how this is different than the `index` route of `posts_path`. Also, you can ignore the `(.:format)` text for now. If you open up the Rails console again, you can call the route helpers. If you have a `Post` with an `id` of `3`, you can run `app.post_path(3)` and see what the resulting output is. Running route helpers in the rails console is a great way of testing out routes to see what their exact output will be
 
-* **Column 4** - This column shows the controller and action with a syntax of `controller#action`.
+* **Column 4** - This column shows the controller and action with a syntax of `controller#action`
 
 One of the other nice things about utilizing route helper methods is that they create predictable names for the methods. Once you get into day-to-day Rails development, you will only need to run `rake routes` to find custom paths. Let's imagine that you take over a legacy Rails application that was built with traditional routing conventions. If you see CRUD controllers for newsletters, students, sales, offers, and coupons, you don't have to look up the routes to know that you could call the index URLs for each resource below:
 
