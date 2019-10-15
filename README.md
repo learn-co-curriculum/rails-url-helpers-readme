@@ -122,7 +122,8 @@ We're using the `link_to` method to automatically create an HTML `a` tag. If you
 
 ![Link To](https://s3.amazonaws.com/flatiron-bucket/readme-lessons/link_to.png)
 
-As you can see, even though we never added HTML code for the link –– e.g., `<a href="..."></a>` –– the `link_to` method rendered the correct tag for us.
+(If your browser loads a blank page, add Post.create(title: 'A lovely title', description: 'A superb description')
+ to db/seeds.rb, run rake db:migrate, and then restart your server.) As you can see, even though we never added HTML code for the link –– e.g., `<a href="..."></a>` –– the `link_to` method rendered the correct tag for us.
 
 
 ## Using the :as option
