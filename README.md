@@ -128,12 +128,12 @@ We're using the `link_to` method to automatically create an HTML `a` tag. If you
 
 ## Using the :as option
 
-If for any reason you don't like the naming structure for the methods or paths, you can customize them quite easily. A common change is updating the path users go to in order to register for a site. Out of the box, the standard path would be `/users/new`. However, we want something a little more readable, like `/register`.
+If for any reason you don't like the naming structure for the methods or paths, you can customize them quite easily. A common change is updating the path users go to in order to register for a site..
 
-In order to make this change, let's update the `routes.rb` file, adding the following line:
+If we had a `User` model/controller, in `routes.rb` file, you would add the following line:
 
 ```ruby
-get '/register', to: 'users#new', as: 'register'
+get '/user/new', to: 'users#new', as: 'register'
 ```
 
 Now the application lets users navigate to `/register` to sign up, and you, the developer, can utilize your own custom `register_path` route helper throughout the app.
