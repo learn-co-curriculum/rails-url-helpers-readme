@@ -218,10 +218,9 @@ following line:
 get '/user/new', to: 'users#new', as: 'register'
 ```
 
-Now the application lets users navigate to `/register` to sign up, and you, the
-developer can utilize your own custom `register_path` route helper throughout
-the app.
-
+Now the application lets programmers use `register_path` when creating links
+with `link_to`. Rails leverages routes and these "helper route" names in many
+places to help you keep your code flexible and brief.
 
 ## Summary
 
