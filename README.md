@@ -6,7 +6,6 @@ this principle operates in a Rails app. In this section, we will review how to
 leverage built-in URL helper methods instead of hard coding route paths into an
 application (along with why this is a good idea).
 
-
 ## Paths vs Route Helpers
 
 What's a real-world difference between using hard-coded paths compared with
@@ -32,10 +31,16 @@ like in code:
 
 * **Hard-coded path:** `"/posts/#{@post.id}"`
 
+Here you're saying: "I know exactly the GPS coordinates of my meeting, driver.
+Do exactly as I say."
+
 * **Route helper:** `post_path(@post)`
 
-So why would we want to use route helper methods as opposed to hard coding
-paths into the application? Below are a few of the key rationales:
+Here you're saying: "Can you find the best way to a controller that knows how
+to work with this thing called a `Post` based on looking at this instance
+called `@post`.
+
+We want to use route helper methods as opposed to hard coding because:
 
 * Route helpers are more dynamic since they are methods and not simply strings.
   This means that if something changes with the route there are many cases
@@ -66,9 +71,8 @@ looks like this:
 resources :posts, only: [:index, :show]
 ```
 
-We briefly discussed this `resources` method in the dynamic routing lesson.
 This will create routing methods for posts that we can utilize in our views and
-controllers. Running `rake routes` in the terminal will give the following
+controllers. Running `rails routes` in the terminal will give the following
 output:
 
 ```bash
@@ -112,24 +116,27 @@ methods. The breakdown is below:
 
 One of the other nice things about utilizing route helper methods is that they
 create predictable names for the methods. Once you get into day-to-day Rails
-development, you will only need to run `rake routes` to find custom paths.
+development, you will only need to run `rails routes` to find custom paths.
+
 Let's imagine that you take over a legacy Rails application that was built with
 traditional routing conventions. If you see CRUD controllers for newsletters,
 students, sales, offers, and coupons, you don't have to look up the routes to
 know that you could call the index URLs for each resource below:
 
 * Newsletters - `newsletters_path`
-
 * Students - `students_path`
-
 * Sales - `sales_path`
-
 * Offers - `offers_path`
-
 * Coupons - `coupons_path`
 
+This is an example of the Rails design goal: "convention over configuration."
+Rails' convention is that resources are accessible through their pluralized
+name with `_path` tacked on. Since **all** Rails developers honor these
+conventions, Rails developers rapidly come to feel at home in other Rails
+developers' codebases.
 
-## link_to Method
+
+## The `link_to` Method
 
 Our first three tests are currently passing; let's take a look at the lone
 failure. The failing test ensures that a link from the index page will point to
@@ -154,8 +161,8 @@ page. To fix this, let's update the index page like so:
 <% end %>
 ```
 
-Wow, is this 2004? That is some ugly code. Let's use a `link_to` method to
-clean this up and get rid of multiple `ERB` calls on the same line.
+That is some bossy code. Let's use a `link_to` method to clean this up and get
+rid of multiple `ERB` calls on the same line.
 
 ```erb
 <% @posts.each do |post| %>
@@ -164,7 +171,7 @@ clean this up and get rid of multiple `ERB` calls on the same line.
 ```
 
 This works and gets the tests passing, however, it can be refactored. Instead of
-hardcoding the path and using string interpolation, let's use `post_path` and
+hard-coding the path and using string interpolation, let's use `post_path` and
 pass in the `post` argument.
 
 ```erb
@@ -195,7 +202,7 @@ the following:
 description: 'A superb description') to `db/seeds.rb`, run rake `db:migrate`, and
 then restart your server.) As you can see, even though we never added HTML code
 for the link –– e.g., `<a href="..."></a>` –– the `link_to` method rendered the
-correct tag for us.
+correct tag for us.)
 
 
 ## Using the :as option
