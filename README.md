@@ -1,18 +1,18 @@
 # Rails URL Helpers
 
-Since Rails by design was meant to be flexible, the result is that there are
-typically a number of ways to accomplish the same features. Routes are a great
-example for how this principle operates in a Rails app. In this section we will
-review how to leverage built-in URL helper methods instead of hard coding route
-paths into an application (along with why this is a good idea).
+Since Rails is meant to be flexible. As a result, is there are typically a
+number of ways to accomplish the same goals. Routes are a great example of how
+this principle operates in a Rails app. In this section, we will review how to
+leverage built-in URL helper methods instead of hard coding route paths into an
+application (along with why this is a good idea).
 
 
 ## Paths vs Route Helpers
 
-What's a real world difference between using hard coded paths compared with
+What's a real-world difference between using hard-coded paths compared with
 route helper methods? Let's imagine that you have a meeting in NYC, and you
-want to get from one side of the city to the other. You have a couple different
-options:
+want to get from one side of the city to the other. You have a couple of
+different options:
 
 1. Traverse the streets on foot
 2. Take a taxi
@@ -30,13 +30,12 @@ it's not as difficult or slow to adjust.
 Don't worry if it's still a little fuzzy. Here's an example of what it looks
 like in code:
 
-* **Hard coded path:** `"/posts/#{@post.id}"`
+* **Hard-coded path:** `"/posts/#{@post.id}"`
 
 * **Route helper:** `post_path(@post)`
 
 So why would we want to use route helper methods as opposed to hard coding
-paths into the application? There are a number of reasons. Below are a few of
-the key rationales:
+paths into the application? Below are a few of the key rationales:
 
 * Route helpers are more dynamic since they are methods and not simply strings.
   This means that if something changes with the route there are many cases
@@ -51,7 +50,7 @@ the key rationales:
   more readable than `"posts/<%= post.id %>?opt_in=true"`
 
 * Route helpers translate directly into HTML-friendly paths. In other words, if
-  you have any weird characters in your urls, the route helpers will convert
+  you have any weird characters in your URLs, the route helpers will convert
   them so they can be read properly by browsers. This includes items such as
   spaces or characters such as `&`, `%`, etc.
 
@@ -77,8 +76,8 @@ posts   GET  /posts(.:format)       posts#index
 post    GET  /posts/:id(.:format)   posts#show
 ```
 
-These four columns tell us everything that we'll need in order to use the route
-helper methods. The breakdown is below:
+These four columns tell us everything that we'll need to use the route helper
+methods. The breakdown is below:
 
 * **Column 1** - This column gives the prefix for the route helper methods. In
   the current application, `posts` and `post` are the prefixes for the methods
@@ -164,9 +163,9 @@ clean this up and get rid of multiple `ERB` calls on the same line.
 <% end %>
 ```
 
-This works and gets the tests passing, however it can be refactored. Instead of
+This works and gets the tests passing, however, it can be refactored. Instead of
 hardcoding the path and using string interpolation, let's use `post_path` and
-pass in the post argument.
+pass in the `post` argument.
 
 ```erb
 <% @posts.each do |post| %>
@@ -193,7 +192,7 @@ the following:
 ![Link To](https://s3.amazonaws.com/flatiron-bucket/readme-lessons/link_to.png)
 
 (If your browser loads a blank page, add Post.create(title: 'A lovely title',
-description: 'A superb description') to db/seeds.rb, run rake db:migrate, and
+description: 'A superb description') to `db/seeds.rb`, run rake `db:migrate`, and
 then restart your server.) As you can see, even though we never added HTML code
 for the link –– e.g., `<a href="..."></a>` –– the `link_to` method rendered the
 correct tag for us.
@@ -203,7 +202,7 @@ correct tag for us.
 
 If for any reason you don't like the naming structure for the methods or paths,
 you can customize them quite easily. A common change is updating the path users
-go to in order to register for a site..
+go to in order to register for a site.
 
 If we had a `User` model/controller, in `routes.rb` file, you would add the
 following line:
@@ -213,13 +212,13 @@ get '/user/new', to: 'users#new', as: 'register'
 ```
 
 Now the application lets users navigate to `/register` to sign up, and you, the
-developer, can utilize your own custom `register_path` route helper throughout
+developer can utilize your own custom `register_path` route helper throughout
 the app.
 
 
 ## Summary
 
-Hopefully this lesson shed some light on the beauty of using route helper
+Hopefully, this lesson shed some light on the beauty of using route helper
 methods. If you run the tests again after making the above changes, you'll
 notice something interesting: all of the tests are still passing! If we had
 hardcoded the URLs in the links in our views, we would have had a major issue:
