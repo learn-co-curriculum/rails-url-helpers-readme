@@ -215,7 +215,7 @@ If we had a `User` model/controller, in `routes.rb` file, you would add the
 following line:
 
 ```ruby
-get '/user/new', to: 'users#new', as: 'register'
+get '/users/new', to: 'users#new', as: 'register'
 ```
 
 Now the application lets programmers use `register_path` when creating links
