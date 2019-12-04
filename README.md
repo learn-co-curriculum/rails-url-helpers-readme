@@ -1,6 +1,6 @@
 # Rails URL Helpers
 
-Since Rails is meant to be flexible. As a result, is there are typically a
+Rails is meant to be flexible. As a result, there are typically a
 number of ways to accomplish the same goals. Routes are a great example of how
 this principle operates in a Rails app. In this section, we will review how to
 leverage built-in URL helper methods instead of hard coding route paths into an
@@ -86,7 +86,7 @@ methods. The breakdown is below:
 * **Column 1** - This column gives the prefix for the route helper methods. In
   the current application, `posts` and `post` are the prefixes for the methods
   that you can use throughout your applications. The two most popular method
-  types are `_path` and `_url`. So if we want to render a relative link path to
+  types are `_path` and `_url`. So if we want to render a link to
   our posts' index page, the method would be `posts_path` or `posts_url`. The
   difference between `_path` and `_url` is that `_path` gives the relative path
   and `_url` renders the full URL. If you open up the rails console, by running
@@ -199,7 +199,7 @@ the following:
 ![Link To](https://s3.amazonaws.com/flatiron-bucket/readme-lessons/link_to.png)
 
 (If your browser loads a blank page, add Post.create(title: 'A lovely title',
-description: 'A superb description') to `db/seeds.rb`, run rake `db:migrate`, and
+description: 'A superb description') to `db/seeds.rb`, run rake `db:seed`, and
 then restart your server.) As you can see, even though we never added HTML code
 for the link –– e.g., `<a href="..."></a>` –– the `link_to` method rendered the
 correct tag for us.)
@@ -215,7 +215,7 @@ If we had a `User` model/controller, in `routes.rb` file, you would add the
 following line:
 
 ```ruby
-get '/user/new', to: 'users#new', as: 'register'
+get '/users/new', to: 'users#new', as: 'register'
 ```
 
 Now the application lets programmers use `register_path` when creating links
