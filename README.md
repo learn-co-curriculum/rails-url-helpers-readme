@@ -56,8 +56,8 @@ We want to use route helper methods as opposed to hard coding because:
 
 * Route helpers translate directly into HTML-friendly paths. In other words, if
   you have any weird characters in your URLs, the route helpers will convert
-  them so they can be read properly by browsers. This includes items such as
-  spaces or characters such as `&`, `%`, etc.
+  them so they can be read properly by browsers. This includes spaces and 
+  characters such as `&`, `%`, etc.
 
 
 ## Implementing Route Helpers
@@ -182,7 +182,7 @@ pass in the `post` argument.
 
 This is much better, but to be thorough, let's make one last refactor: Rails is
 smart enough to know that if you pass in the `post` object as an argument, it
-will automatically use the ID attribute, so we'll use this implementation code:
+should use the ID attribute, so we'll use this implementation code:
 
 ```erb
 <% @posts.each do |post| %>
@@ -208,7 +208,7 @@ correct tag for us.)
 ## Using the :as option
 
 If for any reason you don't like the naming structure for the methods or paths,
-you can customize them quite easily. A common change is updating the path users
+you can customize them quite easily. A common change is to customize the path users
 go to in order to register for a site.
 
 If we had a `User` model/controller, in `routes.rb` file, you would add the
