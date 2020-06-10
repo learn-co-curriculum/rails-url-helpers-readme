@@ -232,4 +232,5 @@ all of our links to the show pages would have broken, along with our Capybara
 tests. However, by using the built-in helper methods, the links all updated
 automatically.
 
+
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/rails-url-helpers-readme'>Rails URL Helpers</a> on Learn.co and start learning to code for free.</p>
