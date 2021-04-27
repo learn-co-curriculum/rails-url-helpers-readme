@@ -75,7 +75,7 @@ This will create routing methods for posts that we can utilize in our views and
 controllers. Running `rails routes` in the terminal will give the following
 output:
 
-```bash
+```txt
 posts   GET  /posts(.:format)       posts#index
 post    GET  /posts/:id(.:format)   posts#show
 ```
