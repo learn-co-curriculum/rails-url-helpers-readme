@@ -29,12 +29,12 @@ it's not as difficult or slow to adjust.
 Don't worry if it's still a little fuzzy. Here's an example of what it looks
 like in code:
 
-* **Hard-coded path:** `"/posts/#{@post.id}"`
+- **Hard-coded path:** `"/posts/#{@post.id}"`
 
 Here you're saying: "I know exactly the GPS coordinates of my meeting, driver.
 Do exactly as I say."
 
-* **Route helper:** `post_path(@post)`
+- **Route helper:** `post_path(@post)`
 
 Here you're saying: "Can you find the best way to a controller that knows how
 to work with this thing called a `Post` based on looking at this instance
@@ -42,23 +42,22 @@ called `@post`.
 
 We want to use route helper methods as opposed to hard coding because:
 
-* Route helpers are more dynamic since they are methods and not simply strings.
+- Route helpers are more dynamic since they are methods and not simply strings.
   This means that if something changes with the route there are many cases
   where the code itself won't need to be changed at all
 
-* Route helper methods help clean up the view and controller code and assist
-  with readability. *On a side note, you cannot use these helper methods in
-  your model files*
+- Route helper methods help clean up the view and controller code and assist
+  with readability. _On a side note, you cannot use these helper methods in
+  your model files_
 
-* It's more natural to be able to pass arguments into a method as opposed to
+- It's more natural to be able to pass arguments into a method as opposed to
   using string interpolation. For example, `post_path(post, opt_in: true)` is
   more readable than `"posts/<%= post.id %>?opt_in=true"`
 
-* Route helpers translate directly into HTML-friendly paths. In other words, if
+- Route helpers translate directly into HTML-friendly paths. In other words, if
   you have any weird characters in your URLs, the route helpers will convert
-  them so they can be read properly by browsers. This includes spaces and 
+  them so they can be read properly by browsers. This includes spaces and
   characters such as `&`, `%`, etc.
-
 
 ## Implementing Route Helpers
 
@@ -83,7 +82,7 @@ post    GET  /posts/:id(.:format)   posts#show
 These four columns tell us everything that we'll need to use the route helper
 methods. The breakdown is below:
 
-* **Column 1** - This column gives the prefix for the route helper methods. In
+- **Column 1** - This column gives the prefix for the route helper methods. In
   the current application, `posts` and `post` are the prefixes for the methods
   that you can use throughout your applications. The two most popular method
   types are `_path` and `_url`. So if we want to render a link to
@@ -95,9 +94,9 @@ methods. The breakdown is below:
   out the full path instead of the relative path. **In general, it's best to use
   the `_path` version so that nothing breaks if your server domain changes**
 
-* **Column 2** - This is the HTTP verb
+- **Column 2** - This is the HTTP verb
 
-* **Column 3** - This column shows what the path for the route will be and what
+- **Column 3** - This column shows what the path for the route will be and what
   parameters need to be passed to the route. As you may notice, the second row
   for the show route calls for an ID. When you pass the `:show` argument to the
   `resources` method, it will automatically create this route and assume that you
@@ -111,7 +110,7 @@ methods. The breakdown is below:
   resulting output is. Running route helpers in the rails console is a great way
   of testing out routes to see what their exact output will be
 
-* **Column 4** - This column shows the controller and action with a syntax of
+- **Column 4** - This column shows the controller and action with a syntax of
   `controller#action`
 
 One of the other nice things about utilizing route helper methods is that they
@@ -123,18 +122,17 @@ traditional routing conventions. If you see CRUD controllers for newsletters,
 students, sales, offers, and coupons, you don't have to look up the routes to
 know that you could call the index URLs for each resource below:
 
-* Newsletters - `newsletters_path`
-* Students - `students_path`
-* Sales - `sales_path`
-* Offers - `offers_path`
-* Coupons - `coupons_path`
+- Newsletters - `newsletters_path`
+- Students - `students_path`
+- Sales - `sales_path`
+- Offers - `offers_path`
+- Coupons - `coupons_path`
 
 This is an example of the Rails design goal: "convention over configuration."
 Rails' convention is that resources are accessible through their pluralized
 name with `_path` tacked on. Since **all** Rails developers honor these
 conventions, Rails developers rapidly come to feel at home in other Rails
 developers' codebases.
-
 
 ## The `link_to` Method
 
@@ -203,7 +201,6 @@ description: 'A superb description') to `db/seeds.rb`, run rake `db:seed`, and
 then restart your server.) As you can see, even though we never added HTML code
 for the link –– e.g., `<a href="..."></a>` –– the `link_to` method rendered the
 correct tag for us.)
-
 
 ## Using the :as option
 
