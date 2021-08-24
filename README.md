@@ -74,7 +74,8 @@ This will create routing methods for posts that we can utilize in our views and
 controllers. Running `rails routes` in the terminal will give the following
 output:
 
-```txt
+```console
+$ rails routes
 posts   GET  /posts(.:format)       posts#index
 post    GET  /posts/:id(.:format)   posts#show
 ```
@@ -205,18 +206,56 @@ correct tag for us.)
 ## Using the :as option
 
 If for any reason you don't like the naming structure for the methods or paths,
-you can customize them quite easily. A common change is to customize the path users
-go to in order to register for a site.
+you can customize them quite easily. For example, let's say we were adding a
+feature to our site so that we could register a new user. We could start adding
+this functionality with the following route:
 
-If we had a `User` model/controller, in `routes.rb` file, you would add the
-following line:
+```rb
+get '/users/new', to: 'users#new'
+```
+
+For all routes in our application, Rails generates a route prefix that we can use
+in our link helpers to generate the correct path. You can see the prefixes by
+running `rails routes`:
+
+```console
+$ rails routes
+   Prefix Verb URI Pattern          Controller#Action
+    posts GET  /posts(.:format)     posts#index
+     post GET  /posts/:id(.:format) posts#show
+users_new GET  /users/new(.:format) users#new
+```
+
+So to use our new `GET /users/new` route in a link helper, we'd use the
+`users_new` prefix:
+
+```erb
+<%= link_to "Register", users_new_path %>
+```
+
+We could make the path a bit easier to understand by using the `:as` option:
 
 ```ruby
 get '/users/new', to: 'users#new', as: 'register'
 ```
 
-Now the application lets programmers use `register_path` when creating links
-with `link_to`. Rails leverages routes and these "helper route" names in many
+Now, running `rails routes` shows us the new prefix for this route:
+
+```console
+$ rails routes
+  Prefix Verb URI Pattern          Controller#Action
+   posts GET  /posts(.:format)     posts#index
+    post GET  /posts/:id(.:format) posts#show
+register GET  /users/new(.:format) users#new
+```
+
+Which means that we can use a more clearly named path in our link helper:
+
+```erb
+<%= link_to "Register", register_path %>
+```
+
+Rails leverages routes and these "helper route" names in many
 places to help you keep your code flexible and brief.
 
 ## Summary
